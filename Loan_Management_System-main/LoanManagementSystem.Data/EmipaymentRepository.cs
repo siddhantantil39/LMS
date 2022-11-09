@@ -7,14 +7,11 @@ namespace LoanManagementSystem.Data
 {
     public class EmiPaymentRepository:BaseRepository
     {
-        public EmiPayment AddPayment(Emi emi, int amountPaid)
+        public EmiPayment AddPayment(EmiPayment emiPayment)
         {
-            EmiPayment payment = new EmiPayment();
-            payment.Emi = emi;
-            payment.EmiAmount = amountPaid;
-            _dbcontext.Add(payment);
+            _dbcontext.Add(emiPayment);
             _dbcontext.SaveChanges();
-            return payment;
+            return emiPayment;
         }
 
         public List<EmiPayment> GetAllPayments()
@@ -22,7 +19,7 @@ namespace LoanManagementSystem.Data
             return _dbcontext.Emipayments.ToList();
         }
 
-        public List<EmiPayment> GetPaymentByEmiId(int emiId)
+        public List<EmiPayment> GetPaymentsByEmiId(int emiId)
         {
             return _dbcontext.Emipayments.Where(payment => payment.Emi.Id == emiId).ToList();
         }

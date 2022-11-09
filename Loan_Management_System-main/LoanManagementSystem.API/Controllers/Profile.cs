@@ -37,9 +37,9 @@ namespace LoanManagementSystem.API
         }
 
         [HttpPost("Profile")]
-        public IActionResult AddCustomer(int id, string custname, string email, string pan, string phoneno, string custAddress)
+        public IActionResult AddCustomer(CustomerInfo customer)
         {
-            CustomerInfo customer = profileService.AddCustomer(id, custname, email, pan, phoneno, custAddress);
+            profileService.AddCustomer(customer);
 
 
             if (customer == null)
@@ -50,3 +50,4 @@ namespace LoanManagementSystem.API
         }
     }
 }
+

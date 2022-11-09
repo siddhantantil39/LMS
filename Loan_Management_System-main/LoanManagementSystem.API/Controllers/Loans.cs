@@ -75,29 +75,5 @@ namespace LoanManagementSystem.API
             return Ok(loanTypes);
         }
 
-        [HttpPost("acceptLoanApplication/{applicationId}")]
-        public IActionResult AcceptLoanApplication(int applicationId)
-        {
-            Emi emi = emiService.AcceptLoanApplication(applicationId);
-            
-            if(emi == null)
-            {
-                return BadRequest("Application cannot be accepted");
-            }
-            return Ok(emi);
-        }
-
-        [HttpPost("declineLoanApplication/{applicationId}")]
-        public IActionResult DeclineLoanApplication(int applicationId)
-        {
-            bool declined = emiService.DeclineLoanApplication(applicationId);
-
-            if (declined == false)
-            {
-                return BadRequest("Cannot Decline Application");
-            }
-            return Ok(declined);
-        }
-
     }
 }

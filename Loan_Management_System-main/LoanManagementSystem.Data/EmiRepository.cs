@@ -23,5 +23,24 @@ namespace LoanManagementSystem.Data
             return _dbcontext.Emis.Include(emi => emi.LoanType).Where(emi => emi.Cust.Id == id).ToList(); 
         }
 
+        public Emi AddEmi(Emi emi)
+        {
+            _dbcontext.Emis.Add(emi);
+            _dbcontext.SaveChanges();
+            return emi;
+        }
+
+        public bool CompleteEmi(Emi emi)
+        {
+            emi = _dbcontext.Emis.Find(emi.Id);
+            if(emi == null)
+            {
+                return false;
+            }
+            emi.EmiCompleted = true;
+            _dbcontext.Update(emi);
+            _dbcontext.SaveChanges();
+            return true;
+        }
     }
 }

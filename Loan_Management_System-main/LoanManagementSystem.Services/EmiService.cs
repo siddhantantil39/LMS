@@ -6,32 +6,17 @@ using System.Threading.Tasks;
 using LoanManagementSystem.Data;
 using LoanManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LoanManagementSystem.Services
 {
     public class EmiService
     {
-        private readonly LoanApplicationRepository? loanApplicationRepository;
         private readonly EmiRepository _repository;
 
         public EmiService()
         {
             _repository = new EmiRepository();
-        }
-        
-        public Emi AcceptLoanApplication(int applicationId)
-        {
-            LoanApplication application = loanApplicationRepository.GetApplicationById(applicationId);
-
-            if(application == null)
-            {
-                return null;
-            }
-
-            Emi emi = new Emi(application);
-            loanApplicationRepository.AcceptLoanApplication(applicationId);
-            return emi;
-            
         }
 
         public List<Emi>? GetAllLoans()
@@ -48,11 +33,11 @@ namespace LoanManagementSystem.Services
         public Emi GetEmiById(int emiId)
         {
             Emi emi = _repository.GetEMIById(emiId);
-
-            EmiPaymentService emiPaymentService = new EmiPaymentService();
-            List<EmiPayment> emiPayments = emiPaymentService.GetPaymentsByEmiId(emiId);
-
-            emi.EmiPayments = emiPayments;
+            if(emi == null)
+            {
+                return null;
+            }
+            
             return emi;
         }
 
@@ -71,13 +56,28 @@ namespace LoanManagementSystem.Services
             return emis;
         }
 
-        public bool DeclineLoanApplication(int applicationId)
+        public Emi AddEmi(LoanApplication application)
         {
-            LoanApplication application = loanApplicationRepository.GetApplicationById(applicationId);
+            EMICalculatorService _EMICalculatorService = new EMICalculatorService();
+            float amount = _EMICalculatorService.Calculate(application.Months, application.Amount, application.Interest);
 
-            loanApplicationRepository.DeclineLoanApplication(applicationId);
+            Emi emi = new Emi(application, amount);
+            Emi newEmi = _repository.AddEmi(emi);
 
-            return true;
+            if(newEmi != null)
+            {
+                return newEmi;
+            }
+            return null;
+        }
+
+        public Emi CompleteEmi(Emi emi)
+        {
+            if (_repository.CompleteEmi(emi))
+            {
+                return emi;
+            }
+            return null;
         }
     }
 }

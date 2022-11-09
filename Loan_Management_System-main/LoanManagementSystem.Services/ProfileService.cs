@@ -29,10 +29,12 @@ namespace LoanManagementSystem.Services
             return profileList;
         }
 
-        public CustomerInfo AddCustomer(int id,string custname,string email,string pan,string phoneno,string custAddress)
+        public CustomerInfo AddCustomer(CustomerInfo customer)
         {
-            CustomerInfo customer = profileRepository.AddCustomer(id, custname, email, pan, phoneno, custAddress);
+            profileRepository.AddCustomer(customer);
             return customer;
         }
     }
 }
+
+

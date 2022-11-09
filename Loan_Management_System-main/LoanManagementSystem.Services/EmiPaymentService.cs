@@ -48,17 +48,43 @@ namespace LoanManagementSystem.Services
 
         public List<EmiPayment> GetPaymentsByEmiId(int EmiId)
         {
-            List<EmiPayment> emiPayments = emiPaymentRepository.GetPaymentByEmiId(EmiId);
+            List<EmiPayment> emiPayments = emiPaymentRepository.GetPaymentsByEmiId(EmiId);
             return emiPayments;
         }
 
-        public EmiPayment AddPayment(int emiId, int amountPaid)
+        public EmiPayment AddPayment(int emiId)
         {
             EmiService emiService = new EmiService();
             Emi emi = emiService.GetEmiById(emiId);
 
-            EmiPayment emiPayment = emiPaymentRepository.AddPayment(emi, amountPaid);
-            return emiPayment;
+            if(emi == null || emi.EmiCompleted)
+            {
+                return null;
+            }
+
+            List<EmiPayment> emiPayments = GetPaymentsByEmiId(emiId);
+
+            DateTime issueDate;
+
+            if (emiPayments.Any())
+            {
+                issueDate = emiPayments.Last().IssueDate.AddMonths(1);
+            }
+            else
+            {
+                issueDate = emi.StartDate.AddMonths(1);
+            }
+
+            EmiPayment emiPayment = new EmiPayment(emi, issueDate);
+
+            EmiPayment newEmiPayment = emiPaymentRepository.AddPayment(emiPayment);
+
+            if(emiPayments.Count == emi.Months - 1)
+            {
+                emiService.CompleteEmi(emi);
+            }
+
+            return newEmiPayment;
         }
     }
 }

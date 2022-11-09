@@ -6,20 +6,24 @@ namespace LoanManagementSystem.Data
     public class LoanApplicationRepository:BaseRepository
     {
 
-        public LoanApplication AddLoanApplication(CustomerInfo customerInfo, LoanType loanType, int loanAmount)
+        public LoanApplication AddLoanApplication(CustomerInfo customerInfo, LoanType loanType, int loanAmount, BankDetail bankDetail, int months)
         {
             LoanApplication loanappl = new LoanApplication();
-            loanappl.Cust = customerInfo;
-            loanappl.LoanType = loanType;
+            loanappl.CustomerInfoId = customerInfo.Id;
+            loanappl.LoanTypeId = loanType.Id;
             loanappl.Amount = loanAmount;
-            _dbcontext.Add(loanappl);
+            loanappl.BankDetailId = bankDetail.Id;
+            loanappl.Interest = loanType.InterestRate;
+            loanappl.Months = months;
+            loanappl.status = LoanStatus.APPLIED;
+            _dbcontext.LoanApplications.Add(loanappl);
             _dbcontext.SaveChanges();
             return loanappl;
         }
 
         public void AcceptLoanApplication(int applicationId)
         {
-            LoanApplication application = GetApplicationById(applicationId);
+            LoanApplication? application = _dbcontext.LoanApplications.Find(applicationId);
             application.status = LoanStatus.ACCEPTED;
             _dbcontext.SaveChanges();
         }
@@ -38,7 +42,7 @@ namespace LoanManagementSystem.Data
 
         public LoanApplication? GetApplicationById(int Id)
         {
-            return _dbcontext.LoanApplications.Include(app => app.LoanType).FirstOrDefault(application => application.AppId == Id);
+            return _dbcontext.LoanApplications.Include(app => app.LoanType).FirstOrDefault(application => application.Id == Id);
         }
 
         public List<LoanApplication> GetApplicationsByCustomerId(int Id)

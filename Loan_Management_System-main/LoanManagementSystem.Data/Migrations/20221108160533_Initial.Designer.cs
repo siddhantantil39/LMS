@@ -4,6 +4,7 @@ using LoanManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoanManagementSystem.Data.Migrations
 {
     [DbContext(typeof(LMSContext))]
-    partial class LMSContextModelSnapshot : ModelSnapshot
+    [Migration("20221108160533_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,20 +46,20 @@ namespace LoanManagementSystem.Data.Migrations
                         new
                         {
                             Id = 1,
-                            BankAddress = "Test",
-                            BankName = "Test"
+                            BankAddress = "Kondapur",
+                            BankName = "Kondapur Branch MyBank"
                         },
                         new
                         {
                             Id = 2,
-                            BankAddress = "Test",
-                            BankName = "Test"
+                            BankAddress = "Madhapur",
+                            BankName = "Kondapur Branch MyBank"
                         },
                         new
                         {
                             Id = 3,
-                            BankAddress = "Test",
-                            BankName = "Test"
+                            BankAddress = "Hitech",
+                            BankName = "Kondapur Branch MyBank"
                         });
                 });
 
@@ -97,7 +99,7 @@ namespace LoanManagementSystem.Data.Migrations
                         {
                             Id = 1,
                             CustAddress = "address",
-                            Custname = "Test1",
+                            Custname = "Rohit",
                             Email = "email@email.com",
                             Pan = "6846asdf",
                             Phoneno = "9876543210"
@@ -106,7 +108,7 @@ namespace LoanManagementSystem.Data.Migrations
                         {
                             Id = 2,
                             CustAddress = "address",
-                            Custname = "Test2",
+                            Custname = "Ria",
                             Email = "email@email.com",
                             Pan = "6846asdf",
                             Phoneno = "9876543210"

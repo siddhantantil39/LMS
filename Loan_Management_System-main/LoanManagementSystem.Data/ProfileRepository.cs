@@ -1,4 +1,5 @@
-﻿using LoanManagementSystem.Models;
+﻿
+using LoanManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LoanManagementSystem.Data
 {
-    public class ProfileRepository:BaseRepository
+    public class ProfileRepository : BaseRepository
     {
 
         public List<CustomerInfo> GetAllProfiles()
@@ -20,18 +21,14 @@ namespace LoanManagementSystem.Data
             return _dbcontext.CustomerInfos.Find(id);
         }
 
-        public CustomerInfo AddCustomer(int id,string custname,string email,string pan,string phoneno,string custAddress)
+        public CustomerInfo AddCustomer(CustomerInfo customer)
         {
-            CustomerInfo customerInfo = new CustomerInfo();
-            customerInfo.Id = id;
-            customerInfo.Custname = custname;
-            customerInfo.Email = email;
-            customerInfo.Pan = pan;
-            customerInfo.Phoneno = phoneno;
-            customerInfo.CustAddress = custAddress;
-            _dbcontext.Add(customerInfo);
+
+            _dbcontext.Add(customer);
             _dbcontext.SaveChanges();
-            return customerInfo;
+            return customer;
         }
     }
 }
+
+    

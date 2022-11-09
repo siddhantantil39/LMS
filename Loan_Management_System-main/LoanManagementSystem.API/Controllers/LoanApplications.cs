@@ -53,15 +53,39 @@ namespace LoanManagementSystem.API
         }
 
         [HttpPost("submitLoanApplication")]
-        public IActionResult SubmitLoanApplication(int CustomerId, string LoanType, int LoanAmount)
+        public IActionResult SubmitLoanApplication(int customerId, int loanTypeId, int loanAmount, int months, int bankId)
         {
-            LoanApplication application = loanApplicationsService.SubmitApplication(CustomerId, LoanType, LoanAmount);
+            LoanApplication application = loanApplicationsService.SubmitApplication(customerId, loanTypeId, loanAmount, months, bankId);
 
             if (application == null)
             {
                 return BadRequest();
             }
             return Ok(application);
+        }
+
+        [HttpPost("acceptLoanApplication/{applicationId}")]
+        public IActionResult AcceptLoanApplication(int applicationId)
+        {
+            Emi? emi = loanApplicationsService.AcceptLoanApplication(applicationId);
+
+            if (emi == null)
+            {
+                return BadRequest("Application cannot be accepted");
+            }
+            return Ok(emi);
+        }
+
+        [HttpPost("declineLoanApplication/{applicationId}")]
+        public IActionResult DeclineLoanApplication(int applicationId)
+        {
+            bool declined = loanApplicationsService.DeclineLoanApplication(applicationId);
+
+            if (declined == false)
+            {
+                return BadRequest("Cannot Decline Application");
+            }
+            return Ok(declined);
         }
 
     }

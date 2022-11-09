@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 namespace LoanManagementSystem.Models
@@ -14,8 +15,10 @@ namespace LoanManagementSystem.Models
                 LoanApplications = new HashSet<LoanApplication>();
             }
 
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             [Key]
             public int Id { get; set; }
+            [Required]
             public string Custname { get; set; }
 
             [Display(Name = "Email address:")]

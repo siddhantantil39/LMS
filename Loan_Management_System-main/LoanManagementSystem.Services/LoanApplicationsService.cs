@@ -61,26 +61,63 @@ namespace LoanManagementSystem.Services
             return application;
         }
 
-        public LoanApplication SubmitApplication(int customerId, string loanTypeName, int loanAmount)
+        public LoanApplication SubmitApplication(int customerId, int loanTypeId, int loanAmount, int months, int bankId)
         {
             ProfileService profileService = new ProfileService();
             CustomerInfo customerInfo = profileService.GetProfileById(customerId);
-            
-            if(customerInfo == null)
-            {
-                return null;
-            }
 
             LoanTypeService loanTypeService = new LoanTypeService();
-            LoanType loanType = loanTypeService.GetLoanTypeByName(loanTypeName);
+            LoanType? loanType = loanTypeService.GetLoanTypeById(loanTypeId);
 
-            if(loanType == null)
+            BankDetailService bankDetailService = new BankDetailService();
+            BankDetail bankDetail = bankDetailService.GetBankDetailById(bankId);
+            
+            if(customerInfo == null || loanType == null || bankDetail == null)
             {
                 return null;
             }
 
-            LoanApplication loanApplication = loanApplicationRepository.AddLoanApplication(customerInfo, loanType, loanAmount);
+            LoanApplication loanApplication = loanApplicationRepository.AddLoanApplication(customerInfo, loanType, loanAmount, bankDetail, months);
+            loanApplication.Cust = customerInfo;
+            loanApplication.BankDetail = bankDetail;
+            loanApplication.LoanType = loanType;
             return loanApplication;
+        }
+
+        public Emi? AcceptLoanApplication(int applicationId)
+        {
+            LoanApplication? application = loanApplicationRepository.GetApplicationById(applicationId);
+
+            if (application == null)
+            {
+                return null;
+            }
+
+            if(application.status == LoanStatus.DECLINED || application.status == LoanStatus.ACCEPTED)
+            {
+                return null;
+            }
+
+            loanApplicationRepository.AcceptLoanApplication(applicationId);
+
+            EmiService _EmiService = new EmiService();
+            Emi newEMI = _EmiService.AddEmi(application);
+            return newEMI;
+
+        }
+
+        public bool DeclineLoanApplication(int applicationId)
+        {
+            LoanApplication? application = loanApplicationRepository.GetApplicationById(applicationId);
+
+            if(application == null || application.status != LoanStatus.APPLIED)
+            {
+                return false;
+            }
+
+            loanApplicationRepository.DeclineLoanApplication(applicationId);
+
+            return true;
         }
     }
 }

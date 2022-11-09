@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace LoanManagementSystem.Services
 {
@@ -16,9 +17,14 @@ namespace LoanManagementSystem.Services
             return _repository.GetAllLoanTypes();
         }
 
-        public LoanType GetLoanTypeByName(string name)
+        public LoanType? GetLoanTypeByName(string name)
         {
             return _repository.GetLoanTypebyName(name);
+        }
+
+        internal LoanType? GetLoanTypeById(int loanTypeId)
+        {
+            return _repository.GetLoanTypebyId(loanTypeId);
         }
     }
 }

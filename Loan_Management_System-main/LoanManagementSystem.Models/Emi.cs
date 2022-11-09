@@ -14,23 +14,28 @@ namespace LoanManagementSystem.Models
             EmiPayments = new List<EmiPayment>();
         }
 
-        public Emi(LoanApplication application)
+        public Emi(LoanApplication application, float amountWithInterest)
         {
-            LoanType = application.LoanType;
-            Cust = application.Cust;
+            CustomerInfoId = application.CustomerInfoId;
             Interest = application.LoanType.InterestRate;
-            Amount = application.Amount;
+            AmountTaken = application.Amount;
             EmiCompleted = false;
+            Interest = application.Interest;
+            Amount = amountWithInterest;
+            Months = application.Months;
+            StartDate = DateTime.Today;
+            LoanTypeId = application.LoanTypeId;
         }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int? Amount { get; set; }
+        public float AmountTaken { get; set; }
         public LoanType LoanType { get; set; }
         public int LoanTypeId { get; set; }
         public float Interest { get; set; }
+        public float Amount { get; set; }
 
         public virtual CustomerInfo Cust { get; set; }
         public int CustomerInfoId { get; set; }

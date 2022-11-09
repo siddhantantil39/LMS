@@ -62,9 +62,9 @@ namespace LoanManagementSystem.API
 
 
         [HttpPost("addPayment/{EmiId}")]
-        public IActionResult AddPayment([FromRoute] int EmiId, int AmountPaid)
+        public IActionResult AddPayment([FromRoute] int EmiId)
         {
-            EmiPayment emiPayment = emiPaymentService.AddPayment(EmiId, AmountPaid);
+            EmiPayment emiPayment = emiPaymentService.AddPayment(EmiId);
             if(emiPayment != null)
             {
                 return Ok(emiPayment);

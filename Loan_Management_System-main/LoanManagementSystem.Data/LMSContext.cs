@@ -30,8 +30,7 @@ namespace LoanManagementSystem.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;Database=LoanManagementSystem;trusted_connection=True;");
+               optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;Database=LMS;trusted_connection=True;");
             }
         }
         
@@ -41,7 +40,7 @@ namespace LoanManagementSystem.Data
                     new CustomerInfo 
                     {
                         Id = 1, 
-                        Custname = "Rohit",
+                        Custname = "Test1",
                         Email = "email@email.com",
                         Pan = "6846asdf",
                         Phoneno = "9876543210", 
@@ -49,7 +48,7 @@ namespace LoanManagementSystem.Data
                     new CustomerInfo
                     {
                         Id = 2,
-                        Custname = "Ria",
+                        Custname = "Test2",
                         Email = "email@email.com",
                         Pan = "6846asdf",
                         Phoneno = "9876543210",
@@ -80,19 +79,25 @@ namespace LoanManagementSystem.Data
             modelBuilder.Entity<LoanApplication>().HasData(
                     new LoanApplication
                     {
-                        AppId = 1,
+                        Id = 1,
                         CustomerInfoId = 1,
                         status = LoanStatus.APPLIED,
                         LoanTypeId = 2,
                         Amount = 1000000,
+                        BankDetailId = 1,
+                        Months = 12,
+                        Interest = 12,
                     },
                     new LoanApplication
                     {
-                        AppId = 2,
+                        Id = 2,
                         CustomerInfoId = 1,
                         status = LoanStatus.APPLIED,
                         LoanTypeId = 3,
                         Amount = 100000,
+                        BankDetailId = 2,
+                        Months = 24,
+                        Interest = 8,
                     }
                 ) ;
 
@@ -147,6 +152,28 @@ namespace LoanManagementSystem.Data
                         PaidOn = new DateTime(2022, 12, 1)
                     }
                 );
+
+            modelBuilder.Entity<BankDetail>().HasData(
+                new BankDetail
+                {
+                    Id = 1,
+                    BankAddress = "Test",
+                    BankName = "Test"
+                },
+                new BankDetail
+                {
+                    Id = 2,
+                    BankAddress = "Test",
+                    BankName = "Test"
+                },
+                new BankDetail
+                {
+                    Id = 3,
+                    BankAddress = "Test",
+                    BankName = "Test"
+                }
+
+            ) ;
             
         }
     }
