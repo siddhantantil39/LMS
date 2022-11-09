@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/
+/LoanManagementSystem.API/obj/
+/LoanManagementSystem.Data/obj/
+/LoanManagementSystem.Services/obj/
+/LoanManagementSystem.Models/obj/
+/LoanManagementSystem.API/bin/
+/LoanManagementSystem.Data/bin/
+/LoanManagementSystem.Services/bin/
+/LoanManagementSystem.Models/bin/
+
