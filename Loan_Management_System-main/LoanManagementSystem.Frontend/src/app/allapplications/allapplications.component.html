@@ -1,0 +1,28 @@
+<p>allapplications works!</p>
+
+<table *ngIf="loanapps">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Loan Type</th>
+      <th>Customer Name</th>
+      <th>Loan Applications</th>
+      <th>Amount</th>
+      <th>Interest</th>
+      <th>Months</th>
+      <th>Bank Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loanapp of loanapps">
+      <td>{{loanapp.id}}</td>
+      <td>{{loanapp.loanType.loanTypeName}}</td>
+      <td>{{loanapp.cust.custname}}</td>
+      <td>{{loanapp.cust.loanApplications.length}}</td>
+      <td>{{loanapp.amount}}</td>
+      <td>{{loanapp.interest}}</td>
+      <td>{{loanapp.months}}</td>
+      <td>{{loanapp.bankDetail}}</td>
+    </tr>
+  </tbody>
+</table>

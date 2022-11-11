@@ -1,0 +1,32 @@
+<p>loanbycustid works!</p>
+
+<table *ngIf="loans">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Amount taken</th>
+      <th>Loan Type</th>
+      <th>Interest rate</th>
+      <th>Amount</th>
+      <th>Customer Info id</th>
+      <th>EMI Payments</th>
+      <th>Start Date</th>
+      <th>Months</th>
+      <th>EMI Completed?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loan of loans">
+      <td>{{loan.id}}</td>
+      <td>{{loan.amountTaken}}</td>
+      <td>{{loan.loanType.loanTypeName}}</td>
+      <td>{{loan.interest}}</td>
+      <td>{{loan.amount}}</td>
+      <td>{{loan.customerInfoId}}</td>
+      <td>{{loan.emiPayments.length}}</td>
+      <td>{{loan.startDate}}</td>
+      <td>{{loan.months}}</td>
+      <td>{{loan.emiCompleted}}</td>
+    </tr>
+  </tbody>
+</table>

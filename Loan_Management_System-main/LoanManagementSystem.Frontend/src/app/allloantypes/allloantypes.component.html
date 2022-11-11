@@ -1,0 +1,18 @@
+<p>allloantypes works!</p>
+
+<table *ngIf="loantypes">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Loan type</th>
+      <th>Interest rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loantype of loantypes">
+      <td>{{ loantype.id }}</td>
+      <td>{{ loantype.loanTypeName }}</td>
+      <td>{{ loantype.interestRate }}</td>
+    </tr>
+  </tbody>
+</table>

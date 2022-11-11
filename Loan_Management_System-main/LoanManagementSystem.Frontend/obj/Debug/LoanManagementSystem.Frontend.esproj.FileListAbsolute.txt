@@ -1,0 +1,6 @@
+D:\CICD\C# - Bootcamp\C# Learning\Loan Management System\LoanManagementSystem.Frontend\obj\Debug\LoanManagementSystem.Frontend.esproj.SuggestedBindingRedirects.cache
+D:\CICD\C# - Bootcamp\C# Learning\Loan Management System\LoanManagementSystem.Frontend\obj\Debug\LoanManagementSystem.Frontend.esproj.CoreCompileInputs.cache
+D:\CICD\CSharpBootcamp\CSharpLearning\Loan Management System\LoanManagementSystem.Frontend\obj\Debug\LoanManagementSystem.Frontend.esproj.SuggestedBindingRedirects.cache
+D:\CICD\CSharpBootcamp\CSharpLearning\Loan Management System\LoanManagementSystem.Frontend\obj\Debug\LoanManagementSystem.Frontend.esproj.CoreCompileInputs.cache
+D:\WF\Bootcamp\project\Loan_Management_System\LoanManagementSystem.Frontend\obj\Debug\LoanManagementSystem.Frontend.esproj.SuggestedBindingRedirects.cache
+D:\WF\Bootcamp\project\Loan_Management_System\LoanManagementSystem.Frontend\obj\Debug\LoanManagementSystem.Frontend.esproj.CoreCompileInputs.cache

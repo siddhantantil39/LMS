@@ -1,11 +1,13 @@
 ﻿using LoanManagementSystem.Models;
 using LoanManagementSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoanManagementSystem.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class BankDetailController : ControllerBase
     {
@@ -27,7 +29,7 @@ namespace LoanManagementSystem.API.Controllers
             return NotFound();
         }
 
-        [HttpGet("getAllBankDetailsById/{Id}")]
+        [HttpGet("getBankDetailsById/{Id}")]
         public IActionResult GetBankDetailById(int Id)
         {
             BankDetail bankDetail = bankDetailService.GetBankDetailById(Id);

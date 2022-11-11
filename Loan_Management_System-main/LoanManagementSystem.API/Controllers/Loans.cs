@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LoanManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoanManagementSystem.API
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class Loans : ControllerBase
     {

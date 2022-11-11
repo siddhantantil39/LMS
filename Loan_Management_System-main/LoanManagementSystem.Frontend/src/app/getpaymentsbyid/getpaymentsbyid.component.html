@@ -1,0 +1,24 @@
+<p>getpaymentsbyid works!</p>
+
+<table *ngIf="payments">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>IssueDate</th>
+      <th>EMI amount</th>
+      <th>Paid on</th>
+      <th>Fine</th>
+      <th>EMI id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let payment of payments">
+      <td>{{ payment.id }}</td>
+      <td>{{ payment.issueDate }}</td>
+      <td>{{ payment.emiAmount }}</td>
+      <td>{{ payment.paidOn }}</td>
+      <td>{{ payment.fine }}</td>
+      <td>{{ payment.emiId }}</td>
+    </tr>
+  </tbody>
+</table>

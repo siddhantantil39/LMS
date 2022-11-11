@@ -1,0 +1,29 @@
+<br />
+<p *ngIf="!profile"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+
+<table *ngIf="profile">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>PAN</th>
+      <th>Phone no.</th>
+      <th>Address</th>
+      <th>EMIs</th>
+      <th>Loan Applications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ profile.id }}</td>
+      <td>{{ profile.custname }}</td>
+      <td>{{ profile.email }}</td>
+      <td>{{ profile.pan }}</td>
+      <td>{{ profile.phoneno }}</td>
+      <td>{{ profile.custAddress }}</td>
+      <td>{{ profile.emis.length }}</td>
+      <td>{{ profile.loanApplications.length }}</td>
+    </tr>
+  </tbody>
+</table>

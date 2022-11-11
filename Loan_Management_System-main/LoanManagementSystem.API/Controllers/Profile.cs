@@ -1,5 +1,6 @@
 ﻿using LoanManagementSystem.Models;
 using LoanManagementSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +8,9 @@ using System;
 
 namespace LoanManagementSystem.API
 {
+
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ProfileController : ControllerBase
     {

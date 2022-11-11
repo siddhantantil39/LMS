@@ -1,0 +1,18 @@
+<p>loantypename works!</p>
+
+<table *ngIf="loantype">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Loan type</th>
+      <th>Interest rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ loantype.id }}</td>
+      <td>{{ loantype.loanTypeName }}</td>
+      <td>{{ loantype.interestRate }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,18 @@
+<p>bankdetails works!</p>
+
+<table *ngIf="bankdetails">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Bank name</th>
+      <th>Bank address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bankdetail of bankdetails">
+      <td>{{ bankdetail.id }}</td>
+      <td>{{ bankdetail.bankName }}</td>
+      <td>{{ bankdetail.bankAddress }}</td>
+    </tr>
+  </tbody>
+</table>
